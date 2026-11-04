@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "Learner List";
+}
+@model IEnumerable<Learner>
+
+<div class="ms-2 mx-2">
+    <h1>Learner List</h1>
+
+    @* ViewComponent hiển thị danh sách chuyên ngành *@
+    @await Component.InvokeAsync("Major")
+
+    @* Vùng hiển thị kết quả AJAX *@
+    <div id="content">
+        <partial name="LearnerTable" model="Model" />
+    </div>
+
+    <a asp-action="Create" class="btn btn-primary">Create New Student</a>
+</div>
+
+@section Scripts {
+    <script>
+        $("ul.major-nav li").click(function (e) {
+            var id = $(this).attr("id");
+            $.ajax({
+                url: '@Url.Action("LearnerByMajorID", "Learner")',
+                data: { mid: id },
+                success: function (response) {
+                    $("div#content").html(response);
+                },
+                error: function () {
+                    $("div#content").html('<div class="alert alert-danger">Không tải được dữ liệu.</div>');
+                }
+            });
+        });
+    </script>
+}

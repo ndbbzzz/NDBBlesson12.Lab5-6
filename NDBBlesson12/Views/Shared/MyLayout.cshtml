@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Management System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/mylayout.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- Begin Top navbar -->
+    <nav class="top-nav d-flex align-items-center">
+        <a class="brand" asp-controller="Home" asp-action="Index">Management System</a>
+        <button type="button" id="sidebarToggle" class="btn btn-link toggle-btn" aria-label="Toggle sidebar">&#9776;</button>
+        <form class="search-form ms-auto d-none d-md-flex" onsubmit="return false;">
+            <input type="text" class="form-control" placeholder="Search for..." />
+            <button type="button" class="btn btn-primary" aria-label="Search">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.868-3.834zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>
+            </button>
+        </form>
+    </nav>
+    <!-- End Top navbar -->
+
+    <div id="layout">
+        <!-- Begin Sidebar -->
+        <aside class="side-nav">
+            <div class="side-heading">CORE</div>
+            <a class="side-link" asp-controller="Home" asp-action="Index"><span class="side-icon">&#9679;</span>Dashboard</a>
+
+            <div class="side-heading">ADDONS</div>
+            <a class="side-link" href="#"><span class="side-icon">&#9636;</span>Branches</a>
+            <a class="side-link" asp-controller="Learner" asp-action="Index"><span class="side-icon">&#9636;</span>Students</a>
+        </aside>
+        <!-- End Sidebar -->
+
+        <!-- Begin Main -->
+        <div class="main-wrap">
+            <main class="p-3">
+                @RenderBody()
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="px-4 text-muted small">Copyright &copy; Management System 2026</div>
+            </footer>
+        </div>
+        <!-- End Main -->
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById("sidebarToggle").addEventListener("click", function () {
+            document.body.classList.toggle("sidebar-hidden");
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

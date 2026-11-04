@@ -1,0 +1,10 @@
+@model IEnumerable<Major>
+
+<ul class="nav major-nav">
+    @foreach (var m in Model)
+    {
+        <li class="nav-item" id="@m.MajorID">
+            <a class="nav-link" style="cursor:pointer">@m.MajorName</a>
+        </li>
+    }
+</ul>
